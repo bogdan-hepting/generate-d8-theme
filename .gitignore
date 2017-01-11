@@ -1,0 +1,15 @@
+# Node modules #
+#######################
+node_modules
+
+
+
+# IDE Files #
+#######################
+.idea
+.project
+.settings
+.tmproj
+nbproject
+*.sublime-project
+*.sublime-workspace
