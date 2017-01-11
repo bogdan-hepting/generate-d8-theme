@@ -62,8 +62,8 @@ function writeTemplates() {
 }
 
 console.log("\nCreating theme files.\n");
-//writeThemeFiles();
-//writeTemplates();
-//writeThemeJs();
-writeThemeSass();
-//writeThemeDirectories();
+writeThemeFiles();
+writeTemplates();
+writeThemeJs();
+//writeThemeSass();
+writeThemeDirectories();
