@@ -2,6 +2,12 @@
 
 Node.js command-line tool for generating theme for Drupal 8.
 
+## Installation
+All you need is run
+```
+npm install generate-d8-theme
+```
+
 
 ## Setup
 Ensure you're in the Drupal project in `theme/your-theme-folder` and run command
