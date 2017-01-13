@@ -27,7 +27,7 @@ function writeThemeDirectories() {
 }
 
 function writeThemeJs() {
-	_write('js/dist/' + dir_name + '.js', '// ' + dir_name + '.js' + '\n\n');
+	_write('js/src/' + dir_name + '.js', '// ' + dir_name + '.js' + '\n\n');
 }
 
 function writeThemeSass() {

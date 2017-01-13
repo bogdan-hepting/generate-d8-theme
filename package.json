@@ -2,8 +2,17 @@
   "name": "generate-d8-theme",
   "version": "1.0.0",
   "description": "A command-line tool for generating theme for Drupal 8.",
+  "keywords": [
+    "Drupal",
+    "D8",
+    "generate theme",
+    "Drupal theme"
+  ],
   "main": "index.js",
-  "author": "Bogdan Hepting",
+  "author": {
+    "name": "Bogdan Hepting",
+    "email" : "varjatua@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "git-clone": "^0.1.0",
