@@ -3,6 +3,32 @@ const dir_name = (process.cwd().split('\\').slice(-1)[0]).replace(/[^a-z0-9_\-.]
 const writeFile = require('write');
 const fs = require('fs');
 const clone = require('git-clone');
+const program = require('commander');
+const exec = require('child_process').exec;
+
+var cmd=require('node-cmd');
+
+program
+  .version('0.0.1')
+  .option('-a, --all', 'Install npm watch scripts (package.json)')
+  .parse(process.argv);
+
+
+function run (cmd, callback) {
+  exec(cmd, function(error, stdout, stderr) {
+    if (stdout) {
+      console.log(stdout);
+    }
+    if (stderr) {
+      console.log(stderr);
+    }
+    if (error !== null) {
+      console.log("exec error: " + error);
+    }
+
+    if (callback) {callback();}
+  });
+}
 
 function _write (filename, content) {
 	if (!fs.existsSync(filename)) {
@@ -30,11 +56,16 @@ function writeThemeJs() {
 	_write('js/src/' + dir_name + '.js', '// ' + dir_name + '.js' + '\n\n');
 }
 
-function writeThemeSass() {
-	// @todo: create repository with sass base files structure instead.
-	//_write('sass/style.scss', '// sass/style.scss' + '\n\n');
+function writeThemeSass(callback) {
+  var git = 'git@github.com:varjatua/scss-base.git',
+      location = './sass/',
+      msg = "\nInstalled base scss files\n";
 
-  clone('git@codebasehq.com:lemberg/drupal-standard/drupal-installation-profile.git', './sass/');
+  run('git clone ' + git + ' ' + location, function() {
+    console.log(msg);
+    run('rm -rf ' + location + '.git');
+    if (callback) {callback();}
+  });
 }
 
 function writeThemeFiles() {
@@ -61,9 +92,43 @@ function writeTemplates() {
   }
 }
 
-console.log("\nCreating theme files.\n");
-writeThemeFiles();
-writeTemplates();
-writeThemeJs();
-//writeThemeSass();
-writeThemeDirectories();
+function writeWatcherFiles() {
+  var git = 'git@github.com:varjatua/npm-watcher.git',
+      location = '.';
+
+  console.log('\nInstalling watcher');
+  run('rm -rf * .*', function() {
+    run('git clone ' + git + ' ' + location, function() {
+      run('rm -rf .git');
+
+      console.log("\nCreating theme files.\n");
+      writeThemeFiles();
+      writeTemplates();
+      writeThemeJs();
+      writeThemeDirectories();
+
+      writeThemeSass(function() {
+        console.log('\nInstalling node modules');
+        run('npm install && npm prune', function() {
+          console.log('\nDone\nNow run command \"npm run watch\"');
+          run('npm run build:all');
+        });
+      });
+    });
+  })
+
+  
+
+}
+
+
+if (program.all) {
+  writeWatcherFiles();
+} else {
+  console.log("\nCreating theme files.\n");
+  writeThemeFiles();
+  writeTemplates();
+  writeThemeJs();
+  writeThemeDirectories();
+  writeThemeSass();
+}
