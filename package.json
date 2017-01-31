@@ -18,9 +18,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "commander": "^2.9.0",
-    "git-clone": "^0.1.0",
-    "write": "^0.3.2"
+    "commander": "^2.9.0"
   },
   "repository": {
     "type": "git",
