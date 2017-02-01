@@ -16,16 +16,7 @@ generate-theme
 ```
 Module will generate basic Drupal 8 theme files for you.
 
-If you want to setup additionally watcher for css and js use command 
-```
-generate-theme -a
-```
-**Note:** theme folder must be empty
-
-more details about watcher [here](https://github.com/varjatua/npm-watcher)
-
 ### Files will be created:
-
 - your-theme-folder.info.yml
 - your-theme-folder.libraries.yml
 - your-theme-folder.theme
@@ -33,3 +24,25 @@ more details about watcher [here](https://github.com/varjatua/npm-watcher)
 - js/src/your-theme-folder.js
 - sass/ _**(basic files will be pulled from git repository)**_
 - images/ _**(empty folder)**_
+
+##Options
+
+###Watcher
+If you want to setup additionally watcher for css and js use command 
+```
+generate-theme -a(--all)
+```
+or
+```
+generate-theme -w(--watcher)
+```
+you will additionally get `package.json` with npm scripts
+more details about watcher [here](https://github.com/bogdan-hepting/npm-watcher#themekit)
+
+###Scss
+If you want get scss files from another git repository use
+```
+generate-theme -s(--sass) path/to/git/repository
+```
+default repository - https://github.com/bogdan-hepting/scss-base
+

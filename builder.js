@@ -1,5 +1,6 @@
 const fs = require('fs');
 const helper = require("./helpers.js");
+const program = require('./program.js');
 
 module.exports = {
   _fileData: function (dir, file_type) {
@@ -42,7 +43,14 @@ module.exports = {
 
   themeSass: function (callback) {
     var git = 'git@github.com:bogdan-hepting/scss-base.git',
-        location = './sass';
+        location = './sass/';
+
+    if (program.sass && program.sass.search(".git") > 0) {
+      git = program.sass;
+    } else {
+      console.log('There is some error with git path');
+      console.log('cloning default scss project');
+    }
 
     if (fs.existsSync(location)) {
       if (callback) {callback();}
@@ -97,7 +105,7 @@ module.exports = {
     console.log('\'npm run watch:css\' - to run watcher (css only)');
     console.log('\'npm run watch:js\' - to run watcher (js only)');
     console.log('\'npm run watch\' - to run watcher (css/js)');
-    console.log('\n for more detail see \'README.md\'');
+    console.log('\n for more detail see file \'README.md\'');
   }
 
 };

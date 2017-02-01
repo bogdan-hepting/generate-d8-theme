@@ -16,9 +16,9 @@ module.exports = {
         if (stderr) {
           console.log(stderr);
         }
-        if (error !== null) {
-          console.log("exec error: " + error);
-        }
+      }
+      if (error !== null) {
+        console.log("exec error: " + error);
       }
 
       if (callback) {callback();}

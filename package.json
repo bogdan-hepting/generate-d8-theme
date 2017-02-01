@@ -1,14 +1,14 @@
 {
   "name": "generate-d8-theme",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A command-line tool for generating theme for Drupal 8.",
   "keywords": [
-    "Drupal",
-    "D8",
+    "Drupal", "D8",
     "generate theme",
+    "theme generator",
     "Drupal theme",
-    "theming",
-    "Drupal 8"
+    "theme", "theming",
+    "drupal 8", "drupal8"
   ],
   "main": "index.js",
   "author": {
