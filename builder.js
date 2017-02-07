@@ -37,19 +37,24 @@ module.exports = {
     }
   },
 
-  themeJs: function () {
+  themeJsCss: function () {
     helper.write('js/src/' + this.project_name + '.js', '// ' + this.project_name + '.js' + '\n\n');
+    helper.write('css/styles.css', '// styles.css' + '\n\n');
   },
 
   themeSass: function (callback) {
     var git = 'git@github.com:bogdan-hepting/scss-base.git',
         location = './sass/';
 
-    if (program.sass && program.sass.search(".git") > 0) {
-      git = program.sass;
-    } else {
-      console.log('There is some error with git path');
-      console.log('cloning default scss project');
+    if (program.sass) {
+      if (program.sass.search(".git") > 0) {
+        git = program.sass;
+      } else {
+        console.log('There is some error with git path');
+        console.log('You have to add path to git repository');
+        console.log('\ngenerate-theme --sass ' + git + '\n');
+        console.log('Cloning default scss project');
+      }
     }
 
     if (fs.existsSync(location)) {

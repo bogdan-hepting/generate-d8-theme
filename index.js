@@ -13,12 +13,17 @@ console.log("\nCreating theme files.\n");
 build.themeDirectories();
 build.themeFiles();
 build.templates();
-build.themeJs();
-build.themeSass(function(){
-  if (!(program.all || program.warcher)) {
-    console.log('\n\nDone!\n');
-    return;
-  } else {
-    build.watcherFiles();
+build.themeJsCss();
+
+if (!(program.all || program.watcher)) {
+  if (program.sass) {
+    build.themeSass(function(){
+      console.log('\n\nDone!\n');
+    });
   }
-});
+  return;
+} else {
+  build.themeSass(function(){
+    build.watcherFiles();
+  });
+}
